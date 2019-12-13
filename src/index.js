@@ -1,12 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import { render, createRoot } from "react-dom";
+import List from "./List";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const styles = {
+  fontFamily: "sans-serif",
+  textAlign: "center"
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  increaseCount() {
+    this.setState({ count: this.state.count + 1 });
+    console.log(this.state.count);
+  }
+
+  render() {
+    return (
+      <div style={styles}>
+        <List />
+      </div>
+    );
+  }
+}
+
+// render(<App />, document.getElementById("root"));
+
+// Enables concurrent mode
+createRoot(document.getElementById("root")).render(<App />);
